@@ -4,6 +4,9 @@ class Libvpx < Formula
   homepage 'http://www.webmproject.org/code/'
   url 'https://webm.googlecode.com/files/libvpx-v1.3.0.tar.bz2'
   sha1 '191b95817aede8c136cc3f3745fb1b8c50e6d5dc'
+  revision 1
+
+  head "https://chromium.googlesource.com/webm/libvpx", :using => :git
 
   bottle do
     sha1 "6c46b6378c782d9cdd345d29caaa536d5bb1b03e" => :mavericks
@@ -20,8 +23,8 @@ class Libvpx < Formula
   def install
     args = ["--prefix=#{prefix}",
             "--enable-pic",
-            "--disable-examples",
-            "--disable-runtime-cpu-detect"]
+            "--enable-examples",
+            "--disable-unit-tests"]
     args << "--enable-gcov" if build.include? "gcov" and not ENV.compiler == :clang
     args << "--enable-mem-tracker" if build.include? "mem-tracker"
     args << "--enable-postproc-visualizer" if build.include? "visualizer"
